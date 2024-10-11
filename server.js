@@ -34,6 +34,5 @@ app.post('/pusher-event', (req, res) => {
     }
 });
 
-app.listen(3000, '0.0.0.0', () => {
-    console.log('Servidor rodando na porta 3000');
-});
+// Exporta a aplicação para o Vercel
+export default app;
