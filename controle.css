@@ -1,0 +1,349 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+h1 {
+    color: white;
+    margin: 0;
+    font-size: 4vw;
+    text-align: center;
+    padding: 1rem;
+}
+
+#calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#calendarTitle {
+    display: flex;
+    justify-content: space-between; /* Espaça os botões e o título */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+    padding: 0 10px;
+}
+
+#calendarTitle button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative; /* Ajusta a posição dos botões em relação ao contêiner */
+}
+
+#prevMonth {
+    position: relative;
+    top: 20px; /* Desce o botão de voltar 20px */
+}
+
+#nextMonth {
+    position: relative;
+    top: 20px; /* Desce o botão de próximo 20px */
+}
+
+#calendarTitle button:hover {
+    background-color: #0056b3;
+}
+
+#monthYear {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    flex: 1; /* Faz com que o título ocupe o espaço restante entre os botões */
+}
+
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    width: 100%;
+    margin-top: 60px;
+}
+
+.day-header {
+    display: contents;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.day-header div {
+    padding: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+
+.day {
+    text-align: center;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 60px;
+    box-sizing: border-box;
+}
+
+.day:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.current-day {
+    background-color: #28a745;
+    color: white;
+}
+
+.past-day {
+    background-color: #ccc;
+    color: #666;
+}
+
+.booked {
+    background-color: #dc3545;
+    color: white;
+}
+
+#timeSlots {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 2px solid #ccc;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+#timeSlots ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#timeSlots li {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#timeSlots li.booked {
+    background-color: #dc3545;
+}
+
+#closeTimeSlots {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#closeTimeSlots:hover {
+    background-color: #0056b3;
+}
+
+#deleteConfirmationModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 2px solid #ccc;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+.modal-content {
+    text-align: center;
+}
+
+#deleteConfirmationModal button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#deleteConfirmationModal button:hover {
+    background-color: #0056b3;
+}
+
+#confirmDelete {
+    background-color: #dc3545;
+}
+
+#confirmDelete:hover {
+    background-color: #c82333;
+}
+
+#cancelDelete {
+    background-color: #6c757d;
+}
+
+#cancelDelete:hover {
+    background-color: #5a6268;
+}
+
+#closeDeleteConfirmationModal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #007bff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Breakpoints */
+@media (max-width: 470px) {
+    h1 {
+        font-size: 6vw;
+    }
+
+    #calendar-container {
+        padding: 10px 5px;
+        width: 100%;
+        max-width: 100%;
+        box-shadow: none;
+    }
+
+    #calendar {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 2px;
+        width: 100%;
+        margin-top: 60px;
+    }
+
+    .day {
+        min-width: 50px;
+        font-size: 0.9em;
+        padding: 10px;
+    }
+
+    #calendarTitle {
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 10px;
+        top: 0; /* Ajusta a posição do título */
+    }
+
+    #calendarTitle button {
+        font-size: 0.8em;
+        padding: 5px;
+    }
+
+    #nextMonth {
+        margin: 0 0 0 200px;
+        position: relative;
+        top: 44px; /* Desce o botão de próximo 20px */
+    }
+
+    #prevMonth {
+        margin: 0 200px 0 0; /* Espaça o botão do título */
+        position: relative;
+        top: 20px; /* Desce o botão de voltar 20px */
+    }
+
+    #monthYear {
+        font-size: 1.2em;
+        margin: 0 10px -80px; /* Adiciona margens para evitar sobreposição */
+    }
+}
+@media (max-width: 640px) {
+    h1 {
+        font-size: 6vw;
+    }
+
+    #calendar-container {
+        padding: 10px 5px;
+        width: 100%;
+        max-width: 100%;
+        box-shadow: none;
+    }
+
+    #calendar {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 2px;
+        width: 100%;
+        margin-top: 60px;
+    }
+
+    .day {
+        min-width: 50px;
+        font-size: 0.9em;
+        padding: 10px;
+    }
+
+    #calendarTitle {
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 10px;
+        top: 0; /* Ajusta a posição do título */
+    }
+
+    #calendarTitle button {
+        font-size: 0.8em;
+        padding: 5px;
+    }
+
+    #nextMonth {
+        margin: 0 0 0 200px;
+        position: relative;
+        top: 44px; /* Desce o botão de próximo 20px */
+    }
+
+    #prevMonth {
+        margin: 0 200px 0 0; /* Espaça o botão do título */
+        position: relative;
+        top: 20px; /* Desce o botão de voltar 20px */
+    }
+
+    #monthYear {
+        font-size: 1.2em;
+        margin: 0 10px -80px; /* Adiciona margens para evitar sobreposição */
+    }
+}
+

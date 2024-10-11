@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle</title>
+    <link rel="stylesheet" href="controle.css">
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+</head>
+<body>
+
+    <h1>Painel de Controle - Agendamentos</h1>
+    
+    <!-- Contêiner do calendário -->
+    <div id="calendar-container">
+        <div id="calendarTitle">
+            <button id="prevMonth">Anterior</button>
+            <span id="monthYear"></span>
+            <button id="nextMonth">Próximo</button>
+        </div>
+        <div id="calendar"></div>
+    </div>
+
+    <!-- Modal para horários -->
+    <div id="timeSlots" style="display: none;">
+        <h2>Horários Disponíveis</h2>
+        <ul id="slotsList"></ul>
+        <button id="closeTimeSlots">Fechar</button>
+    </div>
+
+    <!-- Modal de confirmação de exclusão -->
+    <div id="deleteConfirmationModal" style="display: none;">
+        <div class="modal-content">
+            <p>Deseja realmente excluir esse horário?</p>
+            <button id="confirmDelete">Sim</button>
+            <button id="cancelDelete">Não</button>
+            <span id="closeDeleteConfirmationModal">&times;</span>
+        </div>
+    </div>
+
+    <!-- Link para o arquivo JS -->
+    <script src="controle.js"></script>
+</body>
+</html>
